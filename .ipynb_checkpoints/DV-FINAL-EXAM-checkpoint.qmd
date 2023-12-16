@@ -10,7 +10,7 @@ execute:
 ---
 
 ```{python}
-#| output : flase
+#| output : false
 import numpy as np
 import pandas as pd
 import plotly.express as px
