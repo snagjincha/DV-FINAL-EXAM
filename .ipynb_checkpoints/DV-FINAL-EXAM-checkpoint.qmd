@@ -10,7 +10,7 @@ execute:
 ---
 
 ```{python}
-#| output : false
+#| output: false
 import numpy as np
 import pandas as pd
 import plotly.express as px
@@ -21,7 +21,7 @@ import pickle
 
 pd.options.plotting.backend = "plotly"
 pio.templates.default = "plotly_white"
-#데이터 불러오기
+
 df = pd.read_csv("https://raw.githubusercontent.com/guebin/DV2023/main/posts/NYCTaxi.csv").assign(
     log_trip_duration = lambda df: np.log(df.trip_duration),
     pickup_datetime = lambda df: df.pickup_datetime.apply(pd.to_datetime),
@@ -37,7 +37,6 @@ df = pd.read_csv("https://raw.githubusercontent.com/guebin/DV2023/main/posts/NYC
 )
 df_small = df[::100].reset_index(drop=True)
 
-#1번 데이터 정리
 week_dct = {0:'월',1:'화',2:'수',3:'목',4:'금',5:'토',6:'일'}
 _df = df.copy()
 
@@ -45,13 +44,11 @@ df1 = _df.loc[:,['speed','pickup_hour','dayofweek']].groupby(['pickup_hour','day
 .reset_index().sort_values('dayofweek').reset_index(drop=True)
 df1.dayofweek = df1.dayofweek.map(week_dct)
 
-#2번 데이터 정리
 df2 = _df.loc[:,['pickup_hour','dayofweek','dist']]\
 .groupby(['pickup_hour','dayofweek']).agg('mean').reset_index()\
 .sort_values('dayofweek').reset_index(drop=True).rename({'dist':'dist_mean'},axis=1)
 df2.dayofweek = df2.dayofweek.map(week_dct)
 
-#3번 데이터 정리
 df = pd.read_csv("https://raw.githubusercontent.com/guebin/DV2023/main/posts/NYCTaxi.csv").assign(
     log_trip_duration = lambda df: np.log(df.trip_duration),
     pickup_datetime = lambda df: df.pickup_datetime.apply(pd.to_datetime),
@@ -165,9 +162,6 @@ for i in range(150):
         fig3.data[i]['name']='조금느림(pickup/dropoff)'
     elif (fig3.data[i]['mode']=='markers') and (fig3.data[i]['name']=='매우느림'):
         fig3.data[i]['name']='매우느림(pickup/dropoff)'
-
-
-
 ```
 
 # 기말고사1-(1),(2)
