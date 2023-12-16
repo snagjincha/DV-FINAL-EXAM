@@ -162,6 +162,8 @@ for i in range(150):
         fig3.data[i]['name']='조금느림(pickup/dropoff)'
     elif (fig3.data[i]['mode']=='markers') and (fig3.data[i]['name']=='매우느림'):
         fig3.data[i]['name']='매우느림(pickup/dropoff)'
+
+
 ```
 
 # 기말고사1-(1),(2)
