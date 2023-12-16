@@ -84,13 +84,8 @@ tidydata = tidydata.rename({'speed':'speed_cut'},axis=1).sort_values('speed_cut'
 df_left = dfs.drop(pcol+dcol,axis=1)
 df_right = tidydata
 tidydata1 = df_right.merge(df_left)
-```
 
-# 기말고사1-(1),(2)
-
-```{python}
-#| title: 요일,시간에 따른 평균속력 시각화
-fig = px.density_heatmap(
+fig1 = px.density_heatmap(
     data_frame=df1,
     x='pickup_hour',
     y='dayofweek',
@@ -99,14 +94,11 @@ fig = px.density_heatmap(
     nbinsy=7,
     height=300
 )
-fig['layout']['coloraxis']['colorbar']['title']['text'] = '평균속력'
-fig['layout']['xaxis']['title']['text'] = 'pickup 시간'
-fig['layout']['yaxis']['title']['text'] = '요일'
-fig.show()
-```
+fig1['layout']['coloraxis']['colorbar']['title']['text'] = '평균속력'
+fig1['layout']['xaxis']['title']['text'] = 'pickup 시간'
+fig1['layout']['yaxis']['title']['text'] = '요일'
 
-```{python}
-fig = px.density_heatmap(
+fig2 = px.density_heatmap(
     data_frame=df2,
     x='pickup_hour',
     y='dayofweek',
@@ -115,17 +107,10 @@ fig = px.density_heatmap(
     nbinsy=7,
     height=300
 )
-fig['layout']['coloraxis']['colorbar']['title']['text'] = '평균이동거리'
-fig['layout']['xaxis']['title']['text'] = 'pickup 시간'
-fig['layout']['yaxis']['title']['text'] = '요일'
-fig.show()
-```
+fig2['layout']['coloraxis']['colorbar']['title']['text'] = '평균이동거리'
+fig2['layout']['xaxis']['title']['text'] = 'pickup 시간'
+fig2['layout']['yaxis']['title']['text'] = '요일'
 
-# 기말고사1-(3)
-
-## Column {width=50%}
-
-```{python}
 fig3 = px.line_mapbox(
     data_frame=tidydata1,
     lat = 'latitude',
@@ -181,5 +166,24 @@ for i in range(150):
         fig3.data[i]['name']='매우느림(pickup/dropoff)'
 
 
+
+```
+
+# 기말고사1-(1),(2)
+
+```{python}
+#| title: 요일,시간에 따른 평균속력 시각화
+fig1.show()
+```
+
+```{python}
+#| title: 요일,시간에 따른 평균이동거리 시각화
+fig2.show()
+```
+
+# 기말고사1-(3)
+
+```{python}
+#| title: 속력별 경로시각화
 fig3.show(config={"scrollZoom":False})
 ```
